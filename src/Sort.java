@@ -18,6 +18,51 @@ public class Sort {
         for(int i: arrTest) {
             System.out.print(i + ", ");
         }
+        
+        s.heapSort(arrTest);
+        System.out.print("\n");
+        for(int i: arrTest) {
+            System.out.print(i + ", ");
+        }
+    }
+    
+    public void heapSort(int[] arr) {
+        int heapSize = arr.length;
+        buildMaxHeap(arr, heapSize);
+        for(int i = heapSize; i > 1; i--) {
+            int temp = arr[0];
+            arr[0] = arr[i-1];
+            arr[i-1] = temp;
+            maxHeapify(arr, i-1, 1);
+        }
+    }
+    
+    private void buildMaxHeap(int arr[], int heapSize) {
+        for(int i = heapSize/2; i > 0; i--) {
+            maxHeapify(arr, heapSize, i);
+        }
+    }
+    
+    private void maxHeapify(int[] arr, int heapSize, int i) {
+        int largest;
+        int l = 2 * i;
+        int r = 2 * i + 1;
+        if(l <= heapSize && arr[l-1] > arr[i-1]) {
+            largest = l;
+        } else {
+            largest = i;
+        }
+        
+        if(r <= heapSize && arr[r-1] > arr[largest-1]) {
+            largest = r;
+        }
+        
+        if(largest != i) {
+            int temp = arr[i-1];
+            arr[i-1] = arr[largest-1];
+            arr[largest-1] = temp;
+            maxHeapify(arr, heapSize, largest);
+        }
     }
 
     //对原数组进行重新随机化排序
