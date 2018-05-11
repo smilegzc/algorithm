@@ -25,7 +25,7 @@ public class Sort {
             System.out.print(i + ", ");
         }
     }
-    
+    //堆排序算法
     public void heapSort(int[] arr) {
         int heapSize = arr.length;
         buildMaxHeap(arr, heapSize);
@@ -36,13 +36,13 @@ public class Sort {
             maxHeapify(arr, i-1, 1);
         }
     }
-    
+    //对无序数组建堆
     private void buildMaxHeap(int arr[], int heapSize) {
         for(int i = heapSize/2; i > 0; i--) {
             maxHeapify(arr, heapSize, i);
         }
     }
-    
+    //维护最大堆性质
     private void maxHeapify(int[] arr, int heapSize, int i) {
         int largest;
         int l = 2 * i;
