@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Sort {
     public static void main(String[] args) {
-        int[] arrTest = new int[15];
+        int[] arrTest = new int[30];
         for(int i = 0; i < arrTest.length; i++) {
             arrTest[i] = i + 1;
         }
@@ -19,12 +19,40 @@ public class Sort {
             System.out.print(i + ", ");
         }
         
-        s.heapSort(arrTest);
+        s.quickSort(arrTest, 0, arrTest.length-1);
         System.out.print("\n");
         for(int i: arrTest) {
             System.out.print(i + ", ");
         }
     }
+    
+    public void quickSort(int[] arr, int start, int end) {
+        if(start < end) {
+            int q = partition(arr, start, end);
+            quickSort(arr, start, q-1);
+            quickSort(arr, q+1, end);
+        }
+    }
+    
+    private int partition(int[] arr, int start, int end) {
+        int element = arr[end];
+        int index = start - 1;
+        for(int i = start; i < end; i++) {
+            if(arr[i] <= element) {
+                index++;
+                int temp = arr[index];
+                arr[index] = arr[i];
+                arr[i] = temp;
+            }
+        }
+        index++;
+        int temp = arr[index];
+        arr[index] = arr[end];
+        arr[end] = temp;
+        
+        return index;
+    }
+    
     //堆排序算法
     public void heapSort(int[] arr) {
         int heapSize = arr.length;
